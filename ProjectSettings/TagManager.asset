@@ -6,9 +6,8 @@ TagManager:
   tags:
   - Pelanggan
   - Makanan
-  - Combine1
-  - Combine2
-  - Combine3
+  - Base
+  - Combine
   layers:
   - Default
   - TransparentFX

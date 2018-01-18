@@ -6,7 +6,8 @@ public class SpawnCust : MonoBehaviour {
 
     private float jeda = 2.5f;// variabel untuk memberi jeda spawn 
     float timer;//variabel counter waktu
-    public GameObject objCust;// array utk menyimpan objek
+    public GameObject objCust;// menyimpan objek yg akan di inistiante
+    public Transform[] spawnPoint;//array untuk menyimpan spawn location
 
     // Use this for initialization
     void Start () {
@@ -18,8 +19,8 @@ public class SpawnCust : MonoBehaviour {
         timer += Time.deltaTime;//berdasarkan waktu jeda yang telah ditentukan
         if (timer > jeda)
         {
-            //int random = Random.Range(0, objCust.Length);//menentukan index object sampah secara acak yang akan dimunculkan
-            objCust = Instantiate(objCust, transform.position, transform.rotation); //memunculkan object Sampah dari index yang telah ditentukan sebelumnya dengan posisi dan rotasi Gameoject yang terdapat Script ini
+            int random = Random.Range(0, spawnPoint.Length);//menentukan index object sampah secara acak yang akan dimunculkan
+            Instantiate(objCust, spawnPoint[random]);
             timer = 0;// timer dikembalikan ke 0 untuk menghitung nilai jeda dari awal
         }
     }
