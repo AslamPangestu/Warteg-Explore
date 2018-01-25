@@ -1,28 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum ObjectTypeFood
 {
     Tempe,
     Ayam,
+    Sayur,
     NasiTempe,
     NasiAyam,
-    Lengkap
+    NasiSayur,
+    AyamSayur,
+    TempeSayur,
+    Lengkap,
+    Lengkap1
 }
 public class Makanan : MonoBehaviour {
 
-    public ObjectTypeCustomer typeCustomer;
+    public static Makanan Instance;
     public ObjectTypeFood foodType;
+
     public GameObject[] objChange;
+
     private Vector3 screenPoint;
     private Vector3 offset;
     private float firstY;
     private float firstX;
-    private GameObject makanan;
-    public GameObject baseFood;
-    public GameObject pemesanan;
 
+    GameObject makanan;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     // Use this for initialization
     void Start () {
 
@@ -63,50 +71,179 @@ public class Makanan : MonoBehaviour {
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
-            if (foodType == ObjectTypeFood.Ayam)
+            if (foodType == ObjectTypeFood.Ayam || foodType == ObjectTypeFood.Tempe || foodType == ObjectTypeFood.Sayur)
             {
-                Instantiate(objChange[0], transform.position, transform.rotation);
+                makanan = Instantiate(objChange[0], transform.position, transform.rotation);
             }
-            else if (foodType == ObjectTypeFood.Tempe)
-            {
-                Instantiate(objChange[0], transform.position, transform.rotation);
-            }
-        }else if(collision.gameObject.tag == "Combine")
+        }
+        else if (collision.gameObject.tag == "Combine")
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
-            Instantiate(objChange[1], transform.position, transform.rotation);
+            if (foodType == ObjectTypeFood.Ayam)
+            {
+                if (collision.gameObject.GetComponent<Makanan>().foodType == ObjectTypeFood.NasiSayur)
+                {
+                    Debug.Log("Test");
+                    makanan = Instantiate(objChange[1], transform.position, transform.rotation);
+                }
+                else if (collision.gameObject.GetComponent<Makanan>().foodType == ObjectTypeFood.NasiTempe)
+                {
+                    Debug.Log("Test");
+                    makanan = Instantiate(objChange[2], transform.position, transform.rotation);
+                }
+            }
+            else if (foodType == ObjectTypeFood.Tempe)
+            {
+                if (collision.gameObject.GetComponent<Makanan>().foodType == ObjectTypeFood.NasiSayur)
+                {
+                    Debug.Log("Test");
+                    makanan = Instantiate(objChange[1], transform.position, transform.rotation);
+                }
+                else if (collision.gameObject.GetComponent<Makanan>().foodType == ObjectTypeFood.NasiAyam)
+                {
+                    Debug.Log("Test");
+                    makanan = Instantiate(objChange[2], transform.position, transform.rotation);
+                }
+            }
+            else if (foodType == ObjectTypeFood.Sayur)
+            {
+                if (collision.gameObject.GetComponent<Makanan>().foodType == ObjectTypeFood.NasiAyam)
+                {
+                    Debug.Log("Test");
+                    makanan = Instantiate(objChange[1], transform.position, transform.rotation);
+                }
+                else if (collision.gameObject.GetComponent<Makanan>().foodType == ObjectTypeFood.NasiTempe)
+                {
+                    Debug.Log("Test");
+                    makanan = Instantiate(objChange[2], transform.position, transform.rotation);
+                }
+            }
+        }
+        else if (collision.gameObject.tag == "Combine1")
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+            if (foodType == ObjectTypeFood.Ayam)
+            {
+                if (collision.gameObject.GetComponent<Makanan>().foodType == ObjectTypeFood.TempeSayur)
+                {
+                    makanan = Instantiate(objChange[3], transform.position, transform.rotation);
+                }
+            }
+            else if (foodType == ObjectTypeFood.Tempe)
+            {
+                if (collision.gameObject.GetComponent<Makanan>().foodType == ObjectTypeFood.AyamSayur)
+                {
+                    makanan = Instantiate(objChange[3], transform.position, transform.rotation);
+                }
+            }
+            else if (foodType == ObjectTypeFood.Sayur)
+            {
+                if (collision.gameObject.GetComponent<Makanan>().foodType == ObjectTypeFood.Lengkap)
+                {
+                    makanan = Instantiate(objChange[3], transform.position, transform.rotation);
+                }
+            }
+        }
+        else if (collision.gameObject.tag == "Trash")
+        {
+            Destroy(collision.gameObject);
+            SpawnCust.Instance.BaseFood();
         }
 
-        switch (typeCustomer)
+        switch (collision.gameObject.GetComponent<Customer>().customerType)
         {
             case ObjectTypeCustomer.Customer1:
-                {                   
+                {
                     if (foodType == ObjectTypeFood.NasiAyam)
                     {
                         Destroy(collision.gameObject);
                         Destroy(gameObject);
+                        ScoresManager.Instance.AddCoin();
+                        Customer.Instance.audioSource.PlayOneShot(Customer.Instance.audioClip);
+                        ScoresManager.Instance.AddRep();
+                        SpawnCust.Instance.BaseFood();
                     }
                     break;
-
                 }
-
             case ObjectTypeCustomer.Customer2:
                 {
                     if (foodType == ObjectTypeFood.NasiTempe)
                     {
                         Destroy(collision.gameObject);
                         Destroy(gameObject);
+                        ScoresManager.Instance.AddCoin();
+                        Customer.Instance.audioSource.PlayOneShot(Customer.Instance.audioClip);
+                        ScoresManager.Instance.AddRep();
+                        SpawnCust.Instance.BaseFood();
+                    }
+                    break;
+                }
+            case ObjectTypeCustomer.Customer3:
+                {
+                    if (foodType == ObjectTypeFood.NasiSayur)
+                    {
+                        Destroy(collision.gameObject);
+                        Destroy(gameObject);
+                        ScoresManager.Instance.AddCoin();
+                        Customer.Instance.audioSource.PlayOneShot(Customer.Instance.audioClip);
+                        ScoresManager.Instance.AddRep();
+                        SpawnCust.Instance.BaseFood();
+                    }
+                    break;
+                }
+            case ObjectTypeCustomer.Customer4:
+                {
+                    if (foodType == ObjectTypeFood.TempeSayur)
+                    {
+                        Destroy(collision.gameObject);
+                        Destroy(gameObject);
+                        ScoresManager.Instance.AddCoin();
+                        Customer.Instance.audioSource.PlayOneShot(Customer.Instance.audioClip);
+                        ScoresManager.Instance.AddRep();
+                        SpawnCust.Instance.BaseFood();
+                    }
+                    break;
+                }
+            case ObjectTypeCustomer.Customer5:
+                {
+                    if (foodType == ObjectTypeFood.AyamSayur)
+                    {
+                        Destroy(collision.gameObject);
+                        Destroy(gameObject);
+                        ScoresManager.Instance.AddCoin();
+                        Customer.Instance.audioSource.PlayOneShot(Customer.Instance.audioClip);
+                        ScoresManager.Instance.AddRep();
+                        SpawnCust.Instance.BaseFood();
                     }
                     break;
                 }
 
-            case ObjectTypeCustomer.Customer3:
+            case ObjectTypeCustomer.Customer6:
+                {
+                    if (foodType == ObjectTypeFood.Lengkap1)
+                    {
+                        Destroy(collision.gameObject);
+                        Destroy(gameObject);
+                        ScoresManager.Instance.AddCoin();
+                        Customer.Instance.audioSource.PlayOneShot(Customer.Instance.audioClip);
+                        ScoresManager.Instance.AddRep();
+                        SpawnCust.Instance.BaseFood();
+                    }
+                    break;
+                }
+
+            case ObjectTypeCustomer.Customer7:
                 {
                     if (foodType == ObjectTypeFood.Lengkap)
                     {
                         Destroy(collision.gameObject);
                         Destroy(gameObject);
+                        ScoresManager.Instance.AddCoin();
+                        Customer.Instance.audioSource.PlayOneShot(Customer.Instance.audioClip);
+                        ScoresManager.Instance.AddRep();
+                        SpawnCust.Instance.BaseFood();
                     }
                     break;
                 }

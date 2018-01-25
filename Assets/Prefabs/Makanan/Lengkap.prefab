@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 61804637993504496}
   m_Layer: 0
   m_Name: Lengkap
-  m_TagString: Combine
+  m_TagString: Full
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,15 +72,15 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.94, y: 0.82}
-    newSize: {x: 1.94, y: 0.82}
+    oldSize: {x: 2.01, y: 0.85}
+    newSize: {x: 2.01, y: 0.85}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -99,10 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142e703bc666a0e44bc628ee63af0ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeCustomer: 2
-  foodType: 4
+  foodType: 8
   objChange: []
-  baseFood: {fileID: 1068141684385030, guid: a6b501d554d17a5488c769eed06067b6, type: 2}
 --- !u!212 &212123129432336124
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -137,12 +135,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 385dd2734fa3ff74bba6963fc807406a, type: 3}
+  m_Sprite: {fileID: 21300006, guid: 2e5c40e2d130d1244b2a7ac99bb0af08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.94, y: 0.82}
+  m_Size: {x: 2.01, y: 0.85}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -8,6 +8,8 @@ TagManager:
   - Makanan
   - Base
   - Combine
+  - Combine1
+  - Full
   layers:
   - Default
   - TransparentFX
